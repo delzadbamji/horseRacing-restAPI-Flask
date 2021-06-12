@@ -1,0 +1,79 @@
+<!-- Frontend Webpage for the app to communicate with the user.
+     The text is sent over in a post method and is processed.
+     Once the text is received, the div containing the result is displayed.
+     Author: Delzad Bamji    -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Derby Race</title>
+    <!--    google fonts import-->
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <!--    title font-->
+    <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet"/>
+    <!--    upload font-->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
+    <!--    button-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--    css file-->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/index.css')}}" />
+</head>
+<body>
+<div id="Container">
+    <div>
+        <h1 id="title"> Derby racing:</h1>
+        <div id="Content">
+
+            <div style="margin-left:40%;">
+            <form  action="#" name="form" method="post">
+                <h6 >1.choose a horse(name) to bet on: </h6>
+                <input type="text" class="ip" name="nm" id="ISO" placeholder="stally,zoro,thunder..."/>
+                <br>
+                <br>
+            <button type="submit" name="isoButton" id="submitButtonGet" class="btn btn-primary btn-rounded btn-lg" value="HorseInfo">
+                retrieve horse info
+            </button>
+            </form>
+            </div>
+            <div style="margin-left:40%;">
+                <br>
+                <br>
+                <br>
+                <br>
+            <form action="#" name="form2" method="post">
+                <h6>2.enter horse id that you want to bet on </h6>
+                <input type="text" class="ip" name="HorseId" id="HorseId" placeholder="182,65..."/>
+                <h6>enter your account balance </h6>
+                <input type="text" class="ip" name="account" id="account" placeholder="800,1200,12000..."/>
+                <br>
+                <br>
+                <button type="submit" name="isoButton" id="submitButton" class="btn btn-primary btn-rounded btn-lg" value="ISO" >
+                place bet
+            </button>
+            </form>
+            </div>
+        {% if sql_string !="" or None %}
+            <div id="textContainer">
+                <h2 style="position:absolute;top:-235px; min-width:500px;">The info is as follows:</h2>
+
+                <p id ="op" align="justify"> The endpoint at: <a href={{sql_string}}>{{sql_string}}</a> retrieved response as : {{endpoint_info}} </p>
+            {% if querying != None or "" %}
+                <p id ="op" align="justify"> The requested horse data is : {{horse_data}} </p>
+            {% endif %}
+
+
+            </div>
+        {% endif %}
+            <div id="textContainer">
+            {% if warning != None or "" %}
+                <p align="justify" style="color:#FF0000; position: relative; left: 40%;top: -260px;"> <strong>{{warning}}</strong> </p>
+            {% endif %}
+        </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
